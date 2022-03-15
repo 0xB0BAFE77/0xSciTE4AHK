@@ -12,6 +12,9 @@ During the rewrite of the API files, I built my own format for calltips. This ne
 In addition, my calltips include all possible parameters, what's expected in each, which are optional, return value types, remarks that cover any additional noteworthy information, all options available in any param and minimal descriptions, and each command/function/directive/flowcontrol statement has a minimal example with it.  
 Because who the hell wants to keep alt+tabbing back to the docs to look up something???
 
+Install:
+The `ahk.api` file goes into the main SciTE folder
+
 Example: The current version of SciTE displays [GetKeyState as a command](https://i.imgur.com/aWgDNVf.png) (orange is command in the Hat of God theme).  
 But the calltip card is for a function.  
 Then, if you click the little arrow on the calltip, you get the [command calltip](https://i.imgur.com/ujaLVd0.png).  
@@ -33,10 +36,17 @@ As there are no method or property styles set up with this current version of Sc
 This file should ensure all keywords are highlighted correctly.  
 Again, all deprecated commands have been removed from from this file to discourage their use. 
 
+Install:
+The `ahk.keywords.properties` file goes into the main SciTE folder
+
 ## [Bounty on a Brain](https://i.imgur.com/Z2NvRZ0.png)
 My final Pi day upload is my own personal and highly customized style file.  
 I spent 2 days straight working on this and quite some time refining it after. Trying a myriad of color combinations, weighting options, when to bold, what colors to use, what hues to avoid, etc...
 I finally settled on this (though, I'm on the fence about a couple things. Don't be surprised if it gets updated ¯\\\_(ツ)\_/¯ )  
+
+Install:
+If you have SciTE installed, this file needs to go in: `.\user\<username>\Documents\AutoHotkey\SciTE\Styles`
+If you have SciTE portable, put it in: `.\SciTE\user\Styles`
 
 The theme is built around a pitch black background.  
 Minimizes eye strain.  
@@ -52,6 +62,15 @@ Flow control always show up as underlined yellow text. You always know where if/
 Built-in functions stand out against normal functions. Numbers always show as underlined.  
 Hopefully, you guys find it as pleasing as I do.
 
-The file I used in the picture is my SciTE syntax teseter and is included in the files folder of this repo.
+The file I used in the picture is my SciTE syntax teseter and is included in the files folder of this repo.  
+
+## TillaGoTo
+This has been updated to be inline with the dark theme.  
+All regex's have been rewritten to be more accurate at capturing appropriate text.  
+I've also updated the capturing process to include class names.  
+Methods are also shown, however they're listed as functions.  
+
+Install:
+Make sure to put `tillagoto.properties` in the main SciTE folder and `TillaGoto.ahk` in the SciTE\tools folder.
 
 Stay tuned for more updates!
