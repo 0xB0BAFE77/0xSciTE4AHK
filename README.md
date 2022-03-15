@@ -14,7 +14,7 @@ Because who the hell wants to keep alt+tabbing back to the docs to look up somet
 
 Example: The current version of SciTE displays [GetKeyState as a command](https://i.imgur.com/aWgDNVf.png) (orange is command in the Hat of God theme).  
 But the calltip card is for a function.  
-Then, if you click the little arrow on the calltip, you get the [function calltips](https://i.imgur.com/ujaLVd0.png).  
+Then, if you click the little arrow on the calltip, you get the [command calltip](https://i.imgur.com/ujaLVd0.png).  
 The reason? The last time this API was updated, the GetKeyState command hadn't been deprecated. That was years ago.  
 My API has removed GetKeyState as a command, the keywords file has it updated as a built-in function (so it highlights correctly), and has only one calltip that is [highly updated](https://i.imgur.com/hCafNOl.png).  
 You'll immediately notice all the extra info provided.  
