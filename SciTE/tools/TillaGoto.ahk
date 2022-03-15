@@ -1,6 +1,7 @@
 /*! TheGood    
 	TillaGoto - Go to functions and labels in your script
-	Last updated: December 30, 2010
+	Last updated: 2022Mar14
+	By: 0xB0BAFE77
 	
 	Usage, changelog and help can be found in the thread:
 	http://www.autohotkey.com/forum/viewtopic.php?t=41575
@@ -792,7 +793,7 @@ ScanScriptFile(sPath, bRecurse = False, bFuncsOnly = False, bIsInclude = False) 
 		If (sPaths%A_Index% = sPath)
 			Return
 	
-	sPaths0 += 1
+	sPaths0++
 	sPaths%sPaths0% := sPath
 	sPaths%sPaths0%_Inc := bIsInclude
 	
@@ -808,7 +809,7 @@ ScanScriptFile(sPath, bRecurse = False, bFuncsOnly = False, bIsInclude = False) 
 		
 		;Expand cache array if it is not cached
 		If Not iCacheIndex {
-			sCache0 += 1
+			sCache0++
 			iCacheIndex := sCache0
 			sCache%iCacheIndex%_Path := sPath
 		}
@@ -1024,11 +1025,9 @@ GetScriptLabels(ByRef s, bExternal = False) {
 	i := 1
 	Loop {
 		
-		;Get next label. All valid (non-hotkey) labels are detected.
-		;(invalid characters are commas, spaces, and escape char)
-		i := RegExMatch(s, "m)(*ANYCRLF)^[[:blank:]]*(?!\Q" v "\E)"
-						 . "\K[a-zA-Z0-9\Q@#$_[]?~``!%^&*+-()={}|\:;""'<>./\E]+:"
-						 . "(?=([[:blank:]]*[\r\n]|[[:blank:]]+\Q" v "\E))", t, i)
+		;Gets hotstrings and labels
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ |\t]*\K(:(?:[\*\?BORTXZ]0?|S[IPE]|C[10]?|[kp]\d+|[ \t])*"
+			. ":.{1,40}\:\:(?=.+?$)|[\w@#\$!]+:(?=[ \t]*?(?=$|;.*?$)))", t, i)
 		
 		;Make sure we found something
 		If Not i
@@ -1043,7 +1042,7 @@ GetScriptLabels(ByRef s, bExternal = False) {
 			;Erase any occurence of the escape char
 			StringReplace, t, t, %u%,, All
 			
-			sLabels0 += 1    ;Increase counter
+			sLabels0++    ;Increase counter
 			If bExternal {
 				sLabels%sLabels0%_File := sPaths0
 				sLabels%sLabels0%_Line := LineFromPosEx(s, i)
@@ -1052,7 +1051,7 @@ GetScriptLabels(ByRef s, bExternal = False) {
 				sLabels%sLabels0%_Line := LineFromPos(i)
 			}
 			
-			sLabels%sLabels0% := t    ;Add to array
+			sLabels%sLabels0% := (InStr(t, "::") ? "HotStr" : "Label") ": " t    ;Add to array
 		}
 		
 		;Set i to the beginning of the next line
@@ -1078,7 +1077,7 @@ GetCachedScriptLabels(iCacheIndex) {
 			If bLineType
 				sLabels%sLabels0%_Line := A_LoopReadLine
 			Else {
-				sLabels0 += 1
+				sLabels0++
 				sLabels%sLabels0% := A_LoopReadLine
 				sLabels%sLabels0%_File := sPaths0
 			}
@@ -1086,6 +1085,9 @@ GetCachedScriptLabels(iCacheIndex) {
 		}
 	}
 }
+
+
+
 
 ;This sub analyses the script and add the hotkeys in it to the array (uses the same array as labels)
 GetScriptHotkeys(ByRef s, bExternal = False) {
@@ -1095,9 +1097,7 @@ GetScriptHotkeys(ByRef s, bExternal = False) {
 	Loop {
 		
 		;Get next hotkey
-		i := RegExMatch(s, "m)(*ANYCRLF)^[[:blank:]]*\K[a-zA-Z0-9\Q%(){}|:""?#_!@^+&<>*~$``-=\[]';/\.,\E]+"
-						 . "([[:blank:]]+&[[:blank:]]+[a-zA-Z0-9\Q%(){}|:""?#_!@^+&<>*~$``-=\[]';/\.,\E]+)?"
-						 . "([[:blank:]]+Up)?(?=::)", t, i)
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ |\t]*?\K[#!^\+\$&<>*~]*?[\w]+([ |\t]+Up|)(?=\:\:)", t, i)
 		
 		;Make sure we found something
 		If Not i
@@ -1118,10 +1118,10 @@ GetScriptHotkeys(ByRef s, bExternal = False) {
 		}
 		
 		;Append the semi-colons
-		t .= "::"
+		t := "Hotkey: " t "::"
 		
 		;Expand the array and fill in the elements
-		sLabels0 += 1    ;Increase counter
+		sLabels0++    ;Increase counter
 		If bExternal {
 			sLabels%sLabels0%_File := sPaths0
 			sLabels%sLabels0%_Line := LineFromPosEx(s, i)
@@ -1157,7 +1157,7 @@ GetCachedScriptHotkeys(iCacheIndex) {
 			If bLineType
 				sLabels%sLabels0%_Line := A_LoopReadLine
 			Else {
-				sLabels0 += 1
+				sLabels0++
 				sLabels%sLabels0% := A_LoopReadLine
 				sLabels%sLabels0%_File := sPaths0
 			}
@@ -1178,8 +1178,7 @@ IsValidHotkey(ByRef s) {
 
 ;This sub analyses the script and add the functions in it to the array
 GetScriptFunctions(ByRef s, bExternal = False) {
-	Local i, t, u
-	
+	Local i, t, u, t_fnd
 	u := GetScriptCommentFlag(s)
 	
 	;Loop through the functions
@@ -1187,19 +1186,23 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 	Loop {
 		
 		;Get the next function
-		i := RegExMatch(s, "m)(*ANYCRLF)^[ |\t]*\K[\w#@\$\?\[\]]+"
-					     . "(?=\(.*?\)(\s+\Q" u "\E.*?[\r\n]+)*?\s+\{)", t, i)
+		
+		;i := RegExMatch(s, "m)(*ANYCRLF)^[ |\t]*\K[\w#@\$\?\[\]]+"
+		;			     . "(?=\(.*?\)(\s+\Q" u "\E.*?[\r\n]+)*?\s+\{)", t, i)
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*?(?P<_fnd>[\w@#\$]+)\([ \t]*?"
+			. "(|[\w@#\$]+[ \t]*?(|[ \t]*?,[ \t]*?[\w@#\$]+)+)\)(([ \t\r\n]+"
+			. "(" u ".*?$)?)+{|[ \t]*?{([ \t]*?$|[ \t]+" u ".*?$))", t, i)
 		
 		;Check if we found something
 		If Not i
 			Break
 		
 		;Make sure it's a valid function
-		If t_fn Not In If,While,Loop
+		If t_fnd Not In If,While,Loop
 		{   ;Increment counter
-			sFuncs0 += 1
+			sFuncs0++
 			
-			t .= "()"
+			t := "Func: " t_fnd "()"
 			If bExternal {
 				sFuncs%sFuncs0%_File := sPaths0
 				sFuncs%sFuncs0%_Line := LineFromPosEx(s, i)
@@ -1207,7 +1210,6 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 				sFuncs%sFuncs0%_File := 0
 				sFuncs%sFuncs0%_Line := LineFromPos(i)
 			}
-			
 			sFuncs%sFuncs0% := t
 		}
 		
@@ -1216,6 +1218,39 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 		If Not i
 			Break
 	}
+
+	;Loop through the classes, too!
+	i := 1
+	Loop {
+		
+		;Get the next class
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*class[ \t]+(?P<_fnd>[\w@#\$]+)"
+			. "([ \t]+extends[ \t]+[\w@#\$]+)?(([ \t\r\n]+(" u ".*?$)?)+{|[ \t]*?"
+			. "{([ \t]*?$|[ \t]+" u ".*?$))", t, i)
+		
+		;Check if we found something
+		If Not i
+			Break
+		
+		;Increment counter
+		sFuncs0++
+		
+		t := "Class: " t_fnd
+		If bExternal {
+			sFuncs%sFuncs0%_File := sPaths0
+			sFuncs%sFuncs0%_Line := LineFromPosEx(s, i)
+		} Else {
+			sFuncs%sFuncs0%_File := 0
+			sFuncs%sFuncs0%_Line := LineFromPos(i)
+		}
+		sFuncs%sFuncs0% := t
+				
+		;Get the next class
+		i := RegExMatch(s, "[\r\n]+\K.", "", i)
+		If Not i
+			Break
+	}
+
 }
 
 GetCachedScriptFunctions(iCacheIndex) {
@@ -1234,7 +1269,7 @@ GetCachedScriptFunctions(iCacheIndex) {
 			If bLineType
 				sFuncs%sFuncs0%_Line := A_LoopReadLine
 			Else {
-				sFuncs0 += 1
+				sFuncs0++
 				sFuncs%sFuncs0% := A_LoopReadLine
 				sFuncs%sFuncs0%_File := sPaths0
 			}
@@ -1269,7 +1304,7 @@ GetScriptDirectives(ByRef s) {
 			Break
 		
 		;Add to array
-		sScanFile0 += 1
+		sScanFile0++
 		sScanFile%sScanFile0% := val
 		
 		;Move to next line
@@ -2135,7 +2170,7 @@ LineHistory(bForward, iRecordMode = 0) {
 	
 	;If we're working on a new file, expand array
 	If Not iCurFile {
-		iFile0 += 1
+		iFile0++
 		iCurLine := 1
 		iCurFile := iFile0
 		iFile%iCurFile%_Count := 0
@@ -2147,7 +2182,7 @@ LineHistory(bForward, iRecordMode = 0) {
 		LH_GetCurLine(iLines%iCurLine%_%iCurFile%)
 	Else If (iRecordMode = 2) { ;Record to the next line
 		
-		iCurLine += 1
+		iCurLine++
 		LH_GetCurLine(iLines%iCurLine%_%iCurFile%)
 		
 		;Set as the new limit
@@ -2162,7 +2197,7 @@ LineHistory(bForward, iRecordMode = 0) {
 			LH_GetCurLine(iLines%iCurLine%_%iCurFile%)
 			
 			;Show the next line
-			iCurLine += 1
+			iCurLine++
 			LH_SetCurLine(iLines%iCurLine%_%iCurFile%)
 		}
 	} Else {    ;Backward
@@ -2174,7 +2209,7 @@ LineHistory(bForward, iRecordMode = 0) {
 			LH_GetCurLine(iLines%iCurLine%_%iCurFile%)
 			
 			;Show the previous line
-			iCurLine -= 1
+			iCurLine--
 			LH_SetCurLine(iLines%iCurLine%_%iCurFile%)
 		}
 	}
@@ -2205,20 +2240,19 @@ HID_Register(UsagePage = False, Usage = False, Handle = False, Flags = 0) {
 	
 	;Prep var
 	VarSetCapacity(uDev, (8 + A_PtrSize), 0)
-	
 	;Check if hwnd needs to be null. RIDEV_REMOVE, RIDEV_EXCLUDE
-	Handle := ((Flags & 0x00000001) Or (Flags & 0x00000010)) ? 0 : Handle
-	
-	NumPut(UsagePage, uDev, 0, "UShort")
-	NumPut(Usage,     uDev, 2, "UShort")
-	NumPut(Flags,     uDev, 4, "UInt")
-	NumPut(Handle,    uDev, 8, "Ptr")
-	
+	,Handle := (Flags & 0x00000001) ? 0
+	    	:  (Flags & 0x00000010) ? 0
+	    	:  Handle
+	,NumPut(UsagePage, uDev, 0, "UShort")
+	,NumPut(Usage,     uDev, 2, "UShort")
+	,NumPut(Flags,     uDev, 4, "UInt")
+	,NumPut(Handle,    uDev, 8, "Ptr")
 	;Call
-	r := DllCall("RegisterRawInputDevices", "Ptr", &uDev, "UInt", 1, "UInt", 8 + A_PtrSize)
+	,r := DllCall("RegisterRawInputDevices", "Ptr", &uDev, "UInt", 1, "UInt", 8 + A_PtrSize)
 	
 	;Check for error
-	If Not r Or ErrorLevel {
+	If (ErrorLevel || !r) {
 		ErrorLevel := "RegisterRawInputDevices call failed."
 		. "`nReturn value: " r
 		. "`nErrorLevel: "   ErrorLevel
@@ -2239,7 +2273,6 @@ HID_GetInputInfo(InputHandle, Flag) {
 															: (HID_NumIsSigned(Flag) ? "Int"
 															: (Flag = 8 ? "Ptr" : "UInt")))
 	Else {    ;We need to get a fresh copy
-		
 		;Get raw data size                                           RID_INPUT
 		r := DllCall("GetRawInputData", "Ptr", InputHandle, "UInt", 0x10000003, "Ptr", 0
 									  , "UInt*", iSize, "UInt", 8 + A_PtrSize * 2)
@@ -2254,10 +2287,9 @@ HID_GetInputInfo(InputHandle, Flag) {
 		
 		;Prep var
 		VarSetCapacity(uRawInput, iSize)
-		
 		;Get raw data                                                RID_INPUT
-		r := DllCall("GetRawInputData", "Ptr", InputHandle, "UInt", 0x10000003, "Ptr", &uRawInput
-									  , "UInt*", iSize, "UInt", 8 + A_PtrSize * 2)
+		,r := DllCall("GetRawInputData", "Ptr", InputHandle, "UInt", 0x10000003, "Ptr", &uRawInput
+		                               , "UInt*", iSize, "UInt", 8 + A_PtrSize * 2)
 		If (r = -1) Or ErrorLevel {
 			ErrorLevel := "GetRawInputData call failed."
 			. "`nReturn value: " r
@@ -2308,9 +2340,9 @@ HID_NumIsSigned(ByRef Flag) {
 ;http://www.autohotkey.com/forum/viewtopic.php?t=32876
 EmptyMem(PID="AHK Rocks"){
 	pid:=(pid="AHK Rocks") ? DllCall("GetCurrentProcessId") : pid
-	h:=DllCall("OpenProcess", "UInt", 0x001F0FFF, "Int", 0, "Int", pid, "Ptr")
-	DllCall("SetProcessWorkingSetSize", "Ptr", h, "Int", -1, "Int", -1)
-	DllCall("CloseHandle", "Ptr", h)
+	,h:=DllCall("OpenProcess", "UInt", 0x001F0FFF, "Int", 0, "Int", pid, "Ptr")
+	,DllCall("SetProcessWorkingSetSize", "Ptr", h, "Int", -1, "Int", -1)
+	,DllCall("CloseHandle", "Ptr", h)
 }
 
 ;Based on Lazslo's CRC32() and MCode() functions
