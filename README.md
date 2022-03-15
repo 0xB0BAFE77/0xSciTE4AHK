@@ -23,7 +23,7 @@ All cards max out at 80 chars.
 In addition, I've included most of the methods and properties found in AHK's native objects (exception, file, funcobject, regex, and of course the core AHK object).  
 
 I went over each command in the last couple days running up to Pi Day to ensure all new commands were represented in the API.  
-I'm sure I've overlooked some stuff or just haven't caught updates between now and then.  
+I'm sure I've overlooked some stuff or just haven't caught updates between the last time I updated this and now.  
 If you find something is missing or you just want to make a suggestion, let me know.  
 0xB0BAFE77@gmail.com  
 
