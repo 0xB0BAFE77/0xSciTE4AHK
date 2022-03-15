@@ -33,7 +33,7 @@ As there are no method or property styles set up with this current version of Sc
 This file should ensure all keywords are highlighted correctly.  
 Again, all deprecated commands have been removed from from this file to discourage their use. 
 
-## [Bounty on a Brain](https://i.imgur.com/zGeInQj.png)
+## [Bounty on a Brain](https://i.imgur.com/Z2NvRZ0.png)
 My final Pi day upload is my own personal and highly customized style file.  
 I spent 2 days straight working on this and quite some time refining it after. Trying a myriad of color combinations, weighting options, when to bold, what colors to use, what hues to avoid, etc...
 I finally settled on this (though, I'm on the fence about a couple things. Don't be surprised if it gets updated ¯\\\_(ツ)\_/¯ )  
