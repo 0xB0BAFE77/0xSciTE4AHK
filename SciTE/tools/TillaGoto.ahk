@@ -1,7 +1,6 @@
 /*! TheGood    
 	TillaGoto - Go to functions and labels in your script
-	Last updated: 2022Mar14
-	By: 0xB0BAFE77
+	Last updated: December 30, 2010
 	
 	Usage, changelog and help can be found in the thread:
 	http://www.autohotkey.com/forum/viewtopic.php?t=41575
@@ -1177,6 +1176,7 @@ IsValidHotkey(ByRef s) {
 }
 
 ;This sub analyses the script and add the functions in it to the array
+; Updated to also included the classes of the script
 GetScriptFunctions(ByRef s, bExternal = False) {
 	Local i, t, u, t_fnd
 	u := GetScriptCommentFlag(s)
@@ -1186,11 +1186,8 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 	Loop {
 		
 		;Get the next function
-		
-		;i := RegExMatch(s, "m)(*ANYCRLF)^[ |\t]*\K[\w#@\$\?\[\]]+"
-		;			     . "(?=\(.*?\)(\s+\Q" u "\E.*?[\r\n]+)*?\s+\{)", t, i)
-		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*?(?P<_fnd>[\w@#\$]+)\([ \t]*?"
-			. "(|[\w@#\$]+[ \t]*?(|[ \t]*?,[ \t]*?[\w@#\$]+)+)\)(([ \t\r\n]+"
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*?(?P<_fnd>[\w@#\$]+\([ \t]*?"
+			. "(|[\w@#\$]+[ \t]*?(|[ \t]*?,[ \t]*?[\w@#\$]+)+)\))(([ \t\r\n]+"
 			. "(" u ".*?$)?)+{|[ \t]*?{([ \t]*?$|[ \t]+" u ".*?$))", t, i)
 		
 		;Check if we found something
