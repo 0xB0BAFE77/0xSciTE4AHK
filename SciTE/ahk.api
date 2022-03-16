@@ -1,3 +1,4 @@
+test(element1,element2,element3)
 ##
 #ClipboardTimeout Num  \nUSE: Amount of time to wait for clipboard access after first attempt fails. \nNUM: -1 = Try indefinitely    0  = Try once \n      N = Time in ms to wait \nEX: #ClipboardTimeout 50
 #ErrorStdOut  \nUSE: Syntax errors that prevent a script from launching are sent to StdErr \n    rather than displaying a dialog.
@@ -1144,6 +1145,7 @@ BarBreak
 BASS
 BASSBOOST
 Between
+Blind
 Black
 Blue
 Bold
@@ -1353,6 +1355,7 @@ Purple
 QSOUNDPAN
 Radio
 Range
+Raw
 Read
 ReadOnly
 Red
@@ -1510,6 +1513,3 @@ ys
 ys+
 yy
 yyyy
-{Blind}
-{Raw}
-{Text}
