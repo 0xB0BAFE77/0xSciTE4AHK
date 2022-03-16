@@ -19,18 +19,17 @@ Chr() NumGet() SubStr() InStr()                 ; Built-In Functions
 MsgBox SysGet Drive Gui WinSet                  ; Commands
 Add ahk_exe Force Center Alnum AltSubmit        ; Subcommands
 Label:                                          ; Labels
-:*:rtm::read the manual!                        ; Hotstring
-If Loop Else For Try GoSub                      ; Flow Control
+If Loop Else For Try GoSub                      ; Control Flow
 Chr() Format() Abs()                            ; Built-In Functions
 Show Style List HTML Wait                       ; Subcommands
-%var_name% %fn_name%() %A_LoopField%()          ; Dereference & deref a built-in var
+%var_name% %fn_name%() %A_LoopField%()          ; Dereference & Deref with built-in var
 var := "Error test                              ; Error - No closing quote
-; Examples =====================================|
-*Escape::ExitApp                                ; Kill switch
-pi := 3.142, var := "pi" dts := A_Now           ; Different var assignments
-arr := [1,2,3], obj := {true:1, false:0}        ; Objects
-:*:pi::SendInput, % %var%                       ; Hotstring using a deref to send pi
-*F1 Up::InputBox, var, End radius:              ; Hotkey to multiplei
+:*:rtm::read the manual!                        ; Hotstring
++!^*Escape::ExitApp                             ; Hotkey::Flow Control
+pi := 3.142, var := "pi"                        ; Different vars
+:*:pi::SendInput, % %var%                       ; Hotstring example sending a derefed pi
+*F1 Up::MsgBox, % "10 x 3.14 = " Round(10*pi,2) ; Hotkey example
+arr := [true, false, null], obj := {"num":-123} ; Objects example
 
 ; Quick boundfunc
 :*:/bf::
