@@ -84,7 +84,7 @@ A chunk of those settings (as well as the dark theme shown int he picture below)
 [Original version](https://i.imgur.com/MMF3OJf.png).  
 [Udpated version](https://i.imgur.com/MGm68Nu.png).
 
-## [Bounty on a Brain](https://i.imgur.com/Z2NvRZ0.png)
+## [Bounty on a Brain](https://i.imgur.com/1agWRh9.png)
 
 *Install:*  
 If you have SciTE installed, this file needs to go in: `.\user\<username>\Documents\AutoHotkey\SciTE\Styles`
