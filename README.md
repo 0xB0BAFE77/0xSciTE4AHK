@@ -70,8 +70,8 @@ Note that it's perfectly fine to use keywords and subcommands as variables. EG: 
 Make sure to put `TillaGoto.ahk` in the SciTE\tools folder.
 The color settings are built into my style file (listed below).
 
-TillaGoTO is an overlooked tool in SciTE. This makes navigating AHK files quick and easy.  
-At any time you can hit F12 or Middle Mouse to bring up a search box.  
+TillaGoTO is an overlooked tool that comes with SciTE. It makes navigating AHK files quick and easy.  
+At any time, you can hit F12 or Middle Mouse to bring up a search box.  
 That box originally searched for functions, hotstrings, hotkeys, labels but didn't always match them properly.  
 I've rewritten all regex matches and also included class detection.  
 Everything is prefixed with one of the following: "HotStr Hotkey Func Label Class" 
@@ -83,7 +83,7 @@ At any time you can hit F12 or Middle Mouse to bring up a search box.
 Hitting F12 again will close it. Alternately, holding Middle Mouse will do this.  
 Alt+Left and Alt+right will cycle you through the history of jumps you've made.  
 Highlighting text and pressing shift+enter or middle mouse will cause tillagoto to jump you to the nearest function/method/label/class/hotkey definition that mates whatever the highlighted text was.  
-TillaGoTo has many settings.  
+TillaGoTo has many settings in the `tillagoto.properties` file.  
 A chunk of those settings (as well as the dark theme shown in the picture below) are covered in my included SciTE style below.
 
 [Original version](https://i.imgur.com/MMF3OJf.png).  
@@ -92,7 +92,7 @@ A chunk of those settings (as well as the dark theme shown in the picture below)
 ## [Bounty on a Brain](https://i.imgur.com/1agWRh9.png)
 
 *Install:*  
-If you have SciTE installed, this file needs to go in: `.\user\<username>\Documents\AutoHotkey\SciTE\Styles`
+If you have SciTE installed, this file needs to go in: `.\user\<username>\Documents\AutoHotkey\SciTE\Styles`  
 If you have SciTE portable, put it in: `.\SciTE\user\Styles`
 
 My final Pi day upload is giving out my own personal style file.  
