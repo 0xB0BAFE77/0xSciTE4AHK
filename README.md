@@ -10,20 +10,24 @@ But the tradeoff is I did more updates before posting. Worth it.
 Let's get to it:
 
 I'm sharing my personal rewrite of the AHK v1 API and KeyWord files for SciTE4AutoHotkey.  
-This updates all calltips, syntax highlight, deprecated commands are removed, tillagoto is working better than before and got some upgrades to functionality and aesthetics, and more.
+This updates all calltips, updates/fixes syntax highlight, removes all deprecated commands from both files,  
+I'm also including an update for tillagoto. Some improvements. Some upgrades. Some fixes. Some aesthetics.  
+Finally, I'm including my personal style file and syntax preview testing file.  
 
 ## API File
 
 *Install:*  
-The `ahk.api` file goes into the main SciTE folder
+The `ahk.api` file goes into the main SciTE folder. This is the folder that scite.exe is in.
 
 During the rewrite of the API files, I built my own "card format" for calltips.  
 This new format minimizes wording while maintaining the full conveyance of the command.  
-In addition, my calltips include all parameters, what each does and what's expected, notes when params are optional, lists return values, gives notations/remarks that cover extra noteworthy information, and most have a small example attached to the bottom to show how to give a quick example of what's expected.   
+In addition, my calltips include all parameters, what each does and what's expected, notes when params are optional, lists return values, gives notations/remarks that cover extra noteworthy information, and most have a small example attached to the bottom that give a quick example of the command's usage.
 
 **Because who the hell wants to keep alt+tabbing back and forth to the docs when the calltip can give you that info???**  
+**Am I right?! :P**  
 ¯\\\_(ツ)\_/¯  
-But seriously, you really will find yourself checking the docs less because you can look up any option symbol, expected param values, find out what errorlevel sets to, or see what all the return values are for 'that one function', etc...
+
+But seriously, don't be surprised when you find yourself checking the docs less because you now when you need to look up some subcommand or some optional symbol or need to know what a value expectrs or need to know what errorlevel gets set to, you can just type the command and the calltip will tell you.
 
 Example: Current version of SciTE displays [GetKeyState as a command](https://i.imgur.com/aWgDNVf.png) (orange is command in the Hat of God theme).  
 But the calltip card is for a function.  
