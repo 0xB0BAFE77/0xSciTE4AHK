@@ -1,6 +1,6 @@
 /*! TheGood    
 	TillaGoto - Go to functions and labels in your script
-	Last updated: December 30, 2010
+	Last updated: 2022 Mar 14
 	
 	Usage, changelog and help can be found in the thread:
 	http://www.autohotkey.com/forum/viewtopic.php?t=41575
