@@ -10,47 +10,50 @@ But the tradeoff is I did more updates before posting. Worth it.
 Let's get to it:
 
 I'm sharing my personal rewrite of the AHK v1 API and KeyWord files for SciTE4AutoHotkey.  
-This updates all calltips, updates/fixes syntax highlight, removes all deprecated commands from both files,  
-I'm also including an update for tillagoto. Some improvements. Some upgrades. Some fixes. Some aesthetics.  
-Finally, I'm including my personal style file and syntax preview testing file.  
+This updates all calltips with more info, fixes syntax highlights, removes all deprecated commands, and incorporates all commands/functions/objects that have been added since this program was last updated.  
+I'm also including an update for TillaGoTo. Made some improvements, some upgrades, some fixes, and added a drop of sexy.  
+Speaking of which, I'm including my personal style file and syntax preview testing file for anyone to use.
 
 ## API File
 
 *Install:*  
-The `ahk.api` file goes into the main SciTE folder. This is the folder that scite.exe is in.
+The `ahk.api` file goes into the main SciTE folder. This is the folder that scite.exe resides in.
 
 During the rewrite of the API files, I built my own "card format" for calltips.  
 This new format minimizes wording while maintaining the full conveyance of the command.  
-In addition, my calltips include all parameters, what each does and what's expected, notes when params are optional, lists return values, gives notations/remarks that cover extra noteworthy information, and most have a small example attached to the bottom that give a quick example of the command's usage.
+In addition, my calltips include all parameters, what each does and what's expected, notes when params are optional, lists return values, gives notations/remarks that cover extra noteworthy information, and most have a small example attached to the bottom that shows how to use the command/function/etc.
 
-**Because who the hell wants to keep alt+tabbing back and forth to the docs when the calltip can give you that info???**  
-**Am I right?! :P**  
+**Because who the hell wants to keep alt+tabbing back and forth to the docs when the calltip can GIVE YOU that info???**  
+**Am I right?!**  
 ¯\\\_(ツ)\_/¯  
 
-But seriously, don't be surprised when you find yourself checking the docs less because you now when you need to look up some subcommand or some optional symbol or need to know what a value expectrs or need to know what errorlevel gets set to, you can just type the command and the calltip will tell you.
+But seriously, don't be surprised when you find yourself checking the docs less and less because you now when you need to look up a subcommand or some optional symbol or need to know what a param expects or need to know what errorlevel gets set to, you can just type the command and the calltip will tell (most likely) you.  
 
-Example: Current version of SciTE displays [GetKeyState as a command](https://i.imgur.com/aWgDNVf.png) (orange is command in the Hat of God theme).  
+Also, don't expect ALL info to be present. These cards cover what's necessary to use the command and are kept as lean as possible. They are not 1:1 replicas of the documentation.
+
+Example: Current version of SciTE displays [GetKeyState as a command](https://i.imgur.com/aWgDNVf.png) (orange in the Hat of God theme = command).  
 But the calltip card is for a function.  
-If you click the little arrow on the calltip, you get the [command calltip](https://i.imgur.com/ujaLVd0.png).  
+If you click the little arrow on the calltip, then you get the [command calltip](https://i.imgur.com/ujaLVd0.png).  
 The last time this API was updated, the GetKeyState command hadn't been deprecated. That was years ago.  
-My API has been fully updated. GetKeyState as a command is removed. It now highlights as a built-in function and only has the [GetKeyState() function calltip](https://i.imgur.com/hCafNOl.png).  
-You'll immediately notice all the extra information now provided.  
-Keys can be by name, scancode, or virtual key.  
-You know what the return values are and what they mean.  
-And the example show's how to write it correctly. Maybe someone is new and hasn't gotten used to strings have to be quoted.  
+The information is minimal.  
+In the updated API, the GetKeyState command is removed, it highlights as a built-in function now, it has only the GetKeyState() function calltip and [that calltip is gives a lot more info](https://i.imgur.com/hCafNOl.png).  
+It now tells you what the command does, what kind of Keys can be used (named, scancode, virtual key), what the modes do including if you leave it blank, what the return values are and what they mean, and finally an example of how to use it.  
+The examples can be of extra help to new users. Let's say someone is new and hasn't gotten used to strings requiring quotes in expressions.  
 They can't figure out why `GetKeyState(Shift, P)` doesn't work.  
-They look at the calltip: "Oh! Those words have to be quoted. Let's try that." => Success!  
+But they look at the calltip and notice: "Oh! Those words have quotes around them. I should try that..." => Success!! :D  
 
-Most of the calltips follow this general format. Some of the cards are larger than others.  
-Prime example: the RegExMatch and RegExReplace cards are rather large. But they also have a huge amount of information packed into a tiny space.  
-Once you learn RegEx, those cards become quick references, alleviating you from having to alt tab out, google a regex cheat sheet, and skim for what you need. Now, just pull  up the calltip.  
-
+Most of the calltips follow this general format.  
+And while I did try to keep all cards as slimmed down as possible, some cards are larger than others.  
+The RegEx commands immediatley come to mind. But in their defense, they have a lot of info packed into a small area.
+And once you learn RegEx, those cards become quick references, alleviating the need to alt tab out, google a regex cheat sheet, and skim for what you need.  
+Now you can just reference your calltips.  
 All cards max out at 80 chars wide.  
-In addition, I've included most of the methods and properties found in AHK's native objects (exception, file, funcobject, regex, and of course the core AHK object).  
+My updated file does include object methods, as well.
 
-In the last couple days I've gone over all commands listed and updated everything that's been added since my last update a couple years back.  
-I'm sure I've overlooked some stuff or missed an update.  
-If you find a missing command/subcommand/etc, let me know.  
+I can always create a slimmed down version if enough people have interest. Simialr to the original version.  
+
+Sidenote: I'm sure I've overlooked some stuff or missed an update to a command or something.  
+If you find a missing something missing or something wrong or an example doesn't work, PLEASE let me know. It's the only way I can fix it.  
 0xB0BAFE77@gmail.com  
 
 ## KeyWords File
@@ -82,7 +85,7 @@ Controls:
 At any time you can hit F12 or Middle Mouse to bring up a search box.  
 Hitting F12 again will close it. Alternately, holding Middle Mouse will do this.  
 Alt+Left and Alt+right will cycle you through the history of jumps you've made.  
-Highlighting text and pressing shift+enter or middle mouse will cause tillagoto to jump you to the nearest function/method/label/class/hotkey definition that mates whatever the highlighted text was.  
+Highlighting text and pressing shift+enter or middle mouse will cause tillagoto to jump you to the nearest function/method/label/class/hotkey definition that matches whatever the highlighted text was.  
 TillaGoTo has many settings in the `tillagoto.properties` file.  
 A chunk of those settings (as well as the dark theme shown in the picture below) are covered in my included SciTE style below.
 
