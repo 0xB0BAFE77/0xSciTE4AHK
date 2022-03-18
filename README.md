@@ -3,15 +3,9 @@
 
 ### At the time of this posting, these files should be AHK v1.1.33.x compliant.  
 
-Updates:  
-* 2022-03-17 Already made some updates.  
-  * Added Get and Set to the files. Missed them when doing the class document.
-  * Updated the api to include the dot prefix (.) to all methods and properties. I didn't realize those had been removed.
-  * Removed a test command I had put in there. There is no test() function. :P
-  * Added in a few properties I missed.
-  * There are some neat features that have been added to SciTE. I'm looking into writing an updated version that incorporates the newest version of SciTE.
-  * I'll try to keep this changelog as up-to-date as possible.
+### [Updates/Change Log](#updateschange-log-1)
 
+**Intro**:  
 **It's Pi day and that means it's time for me to share some stuff!**  
 OK, to be fair I *started* before Pi day and unfortunately did not get finished until after.  
 But the tradeoff is I did more updates before posting. Worth it.  
@@ -131,4 +125,15 @@ Hopefully, you guys find it as pleasing as I do.
 
 The file used in the picture is my SciTE syntax tester and is included with all the other files in the repo.    
 
-# Stay tuned for more updates!
+### Stay tuned for more updates
+
+***
+
+### Updates/Change Log
+* 2022-03-17 Already made some updates.  
+  * Added Get and Set to the files. Missed them when doing the class document.
+  * Updated the api to include the dot prefix (.) to all methods and properties. I didn't realize those had been removed.
+  * Removed a test command I had put in there. There is no test() function. :P
+  * Added in a few properties I missed.
+  * There are some neat features that have been added to SciTE. I'm looking into writing an updated version that incorporates the newest version of SciTE.
+  * I'll try to keep this changelog as up-to-date as possible.
