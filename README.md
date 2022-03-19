@@ -137,8 +137,3 @@ The file used in the picture is my SciTE syntax tester and is included with all 
   * Added in a few properties I missed.
   * There are some neat features that have been added to SciTE. I'm looking into writing an updated version that incorporates the newest version of SciTE.
   * I'll try to keep this changelog as up-to-date as possible.
-
-* 2022-03-19
-  * Added AltMenu to API file (used with the AltTab hotkeys)
-  * Updated my style file.
-  * 
