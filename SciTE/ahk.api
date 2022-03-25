@@ -30,7 +30,7 @@
 #UseHook Value   \nUSE: Forces the use of the hook to implement all | some keyboard hotkeys.\nVALUE: On = Force hook use    Off = Hook is not used\nEX: #UseHook On
 #Warn [Type, Mode]   \nUSE: Control if warnings are shown for specific errors.\nTYPE: If left BLANK, it defaults to All.\n    UseUnsetLocal = Warn if a local variable is read before being declared\n    UseUnsetGlobal = Warn if a global variable is read before being declared\n    UseEnv = Warn if a blank variable inherits an environmental var\n    LocalSameAsGlobal = Warn if a global & local variable share a name\n    ClassOverwrite = Warn if a variable replaces a class\n    All = Include all warnings\nMODE: Warning notification method. BLANK uses MsgBox.\n    MsgBox = Warning is sent to a message box.\n    StdOut = Warning, filename and line number are sent to StdOut.\n    OutputDebug = Warning is sent to the debugger for display.\n    Off = Disable warnings of the given Type.\nEX: #Warn All MsgBox
 #WinActivateForce   \nUSE: Window activation uses a more forceful method.\nREMARK: Affects: WinActivate|WinActivateBottom|GroupActivate
-###
+
 Abs(Num)   \nUSE: Math func. the converts Num to an absolute value.\nRETURN: Number. Integer|Float is dependent on input Number.\nEX: Abs(-12.0) ;R=> 12.0
 ACos(Num)   \nUSE: Math func. Returns the arccosine of Num.\nRETURN: Number. In radians. -1 .. 1\n    BLANK = Number is out of range.\nEX: ACos(0.2) ;R=> 1.369438
 Array(Item1, Item2, ..., ItemN)   \nUSE: An object that stores data in sequentially numbered indexes.\nRETURN: Object. Numbered array.\nMETHODS: All objects have access to these methods:\n    .Clone()    .MaxIndex()    .InsertAt()    .GetAddress()\n    .Count()    .MinIndex()    .RemoveAt()    .GetCapacity()\n    .Pop()      .Delete()      ._NewEnum()    .SetCapacity()\n    .Push()     .Length()      .HasKey()\nEX: arr := Array("Dog","Cat","Bird","Ape") ; Create an array
@@ -150,7 +150,7 @@ TV_SetImageList(ImageListID, [IconType:=0])   \nUSE: Creates or replaces a TreeV
 VarSetCapacity(Variable, [Cap, Fill:=0])   \nUSE: Adjusts the size of Variable or free its memory.\nCAP: Requested size in bytes.\nFILL: Number. 0 .. 255. Fills every byte with Fill number.\nRETURN: Number of bytes the variable can currently hold.\n    BLANK = Variable not found.\n    No Params = Return size of Variable.\nEX: VarSetCapacity(rectStruct, 16) ; Set a Rectangle Structure var to 16 bytes
 WinActive(WinTitle, [WinText, NotTitle, NotText])   \nUSE: Check if the current active window matches the WinTitle criteria.\nWINTITLE: ahk_exe  ahk_class  ahk_id  ahk_pid  ahk_group  A\nREMARK: !WinActive() acts as WinNotActive(). WinTitle A = Use active window.\nRETURN: 0 = Failure. 1+ = Active window's Unique ID (HWND)\nEX: WinActive("ahk_exe SciTe.exe") ;R=> 054c2d5
 WinExist(WinTitle, [WinText, NotTitle, NotText])   \nUSE: Check if any current windows match the WinTitle criteria.\nWINTITLE: WinTitle and it's matching behaviors. See WinTitle command.\n    Types: ahk_exe    ahk_class    ahk_id    ahk_pid    ahk_group\nREMARK: !WinExist() acts as WinNotExist()\nRETURN: 0 = Failure. 1+ = Matching window's Unique ID (HWND)\nEX: WinExist("ahk_exe.exe") ;R=> 054c2d5
-###
+
 Break [LoopLabel]   \nUSE: Stop current loop or the loop running under LoopLabel.\nLOOPLABEL: A label directly over a loop or a loop level number.\n    1 = Current loop    2 = Previous loop    String = Label above a loop\nREMARK: LoopLabel cannot be a variable.\nEX: Break, LoopLvl2 ; Breaks the loop with a label over it called LoopLvl2
 Catch [OutputVar]   \nUSE: Executes code when a try statement throws an exception.\nOUTPUTVAR: Stores an Exception Object.\nREMARK: Catch is used with Try like Else is with If.\nEX: Catch, excepObj ; Catches a try error and notifies user about it\n        MsgBox, An error occurred. Data is saved to excepObj.
 Continue [LoopLabel]   \nUSE: End current loop iteration and start the next one.\nLOOPLABEL: A label directly over a loop or a loop level number.\n    1 = Current loop    2 = Previous loop    String = Label above a loop\nREMARK: LoopLabel cannot be a variable.\nEX: Continue, 2 ; Stops current iteration. Continues previous loop's next iteration
@@ -179,7 +179,7 @@ Throw (Expression)   \nUSE: Signals when an error has occurred. This signal is u
 Try   \nUSE: Guards the next line|block from runtime errors and can throw exceptions.\nREMARK: Used with catch.\nEX: Try                ; Try some function.\n        SomeFunction()
 Until (Expression)   \nUSE: Evaluates Expression each loop iteration. If True, loop breaks.\nREMARK: Use an Until-Loop to guarantee the loop code will run once.\n    Use a While-Loop if you don't want the loop code to run once.\nEX: Loop                    ; Start loop\n        MsgBox, % A_Index   ; Show each A_Index iteration\n    Until (A_Index >= 10)   ; Break when A_Index >= 10
 While (Expression)   \nUSE: Loops through code while Expression evaluates as False.\nREMARK: Use an Until-Loop to guarantee the loop code will run once.\n    Use a While-Loop if you don't want the loop code to run once.\nEX: While (A_Index <= 5)\n        MsgBox, % "Iteration #" A_Index
-###
+
 AutoTrim, On|Off   \nUSE: Controls if whitespace is trimmed from the beginning|end of traditional variables.\nONOFF: On|1 = Trim whitespace    Off|0 = Don't trim whitespace\nREMARK: A_AutoTrim contains this commands current setting.
 BlockInput, Mode   \nUSE: Enable and disable keyboard, mouse, and|or mouse movement.\nMODE1: Keyboard and mouse.    On = Enable    Off = Disable\nMODE2: During send and|or mouse events.\n    Send  = Disable during Send|SendRaw.\n    Mouse = Disable during Click|MouseMove|MouseClick|MouseDrag.\n    SendAndMouse = Send mode + mouse mode.\n    Default = Disable all other modes.\nMODE3: Mouse movement.    MouseMove = Disable    MouseMoveOff = Enable\nREMARK: Each mode operates independently of the others.
 Click, [Button:=Left, X, Y, Count:=1, State, Relative|Rel]   \nUSE: Send different mouse button events.\nBUTTON: Left|Right|Middle|X1|X2|WU|WD|WR|WL    X|Y: Click coordinates\nSTATE: Down|D=Held down    Up|U=Released       COUNT: Number of clicks\nRELATIVE: Movement is relative to mouse position.\nREMARK: Unlike most commands, blank params do not require a comma.\n    Click can be used with send: Send, {Click, Left, 2}\nEX: Click, Left, 50, -50, 2, Rel ; Double click 50 pixels right and\n                                 ; and 50 pixels up from cursor.
@@ -268,7 +268,7 @@ FileGetVersion, OutputVar, [Filename]   \nUSE: Retrieves the version of a file.\
 FileInstall, Source, Dest, [Overwrite:=0]   \nUSE: Includes files inside of a compiled exe.\nSOURCE: Path to the file to include.\n    Path must not contain double quotes, variable references, or wildcards.\nDEST: Destination to put source on file extraction\n    Unlike source, this path can use variable references.\nOVERWRITE: 1 = Overwrite. 0 = Do not overwrite.\nREMARK: Uncompiled files perform a simple copy. This makes testing much easier.\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileInstall, icon.ico, % A_AppData "\\MyProgFiles\\", 1
 FileMove, Source, Dest, [Overwrite]   \nUSE: Move or rename file(s).\nSOURCE: The path to a file. Wildcards allowed.\nDEST: path to destination.\nOVERWRITE: 1 = Overwrite. 0 = Do not overwrite.\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileMove, C:\\Test.txt, C:\\Test.ahk, 1 ; Rename test.txt to test.ahk
 FileMoveDir, Source, Dest, [Flag:=0]   \nUSE: Move|rename a folder and it's sub-folders and files.\nSOURCE: Name of the source directory. No trailing spaces.\nDEST: New path and name of directory. No trailing spaces.\nFLAG: One of the following single characters:\n    0 = Do not overwrite existing files.\n    1 = Overwrite existing files.\n    2 = Same as 1 except prevents a known limitation. See the docs.\n    R = Rename directory instead of moving it.\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileMoveDir, D:\\Scripts, D:\\Backup, 1 ; Backup scripts dir
-FileRead, OutputVar, Filename   \nUSE: Reads a file's contents into a variable.\nFILENAME: Name of file that can include the following prefixed options:\n    *c: Load binary data like ClipboardAll\n    *mN: Max file size in N bytes\n    *t: Replaces CR+LF with LF.\n    *Pnnn: Set FileEncoding identifier where nnn = numeric code page identifier.\nREMARK: If file greater than 1 GB, ErrorLevel = 1 and OutputVar = BLANK\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileRead, txtVar, C:\\Test.txt
+FileRead, OutputVar, Filename   \nUSE: Reads a file's contents into a variable.\nFILENAME: Name of file. Can include these prefixed options separated by spaces:\n    *c: Load binary data like ClipboardAll\n    *mN: Max file size in N bytes\n    *t: Replaces CR+LF with LF.\n    *Pnnn: Set FileEncoding identifier where nnn = numeric code page identifier.\nREMARK: If file greater than 1 GB, ErrorLevel = 1 and OutputVar = BLANK\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileRead, txtVar, C:\\Test.txt
 FileReadLine, OutputVar, Filename, LineNum   \nUSE: Read a line of text from a file into a variable.\nREMARK: Used for small files. For large files, see: FileRead() or Loop-Files\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileReadLine, txtVar, C:\\Test.txt, 2
 FileRecycle, FilePattern   \nUSE: Sends a file or directory to the recycle bin, if possible.\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileRecycle, C:\\Test.txt
 FileRecycleEmpty, [DriveLetter]   \nUSE: Empties the recycle bin of all files.\nDRIVELETTER: If specified, only recycles files from that drive letter.\nErrorLevel+EXO: 0 = Success. 1 = Failure.\nEX: FileRecycleEmpty, C:
@@ -507,7 +507,7 @@ WinWait, [WinTitle, WinText, Wait, NotTitle, NotText]   \nUSE: Waits until the s
 WinWaitActive, [WinTitle, WinText, Wait, NotTitle, NotText]   \nUSE: Waits until the specified window is active.\nWAIT: BLANK = No wait    0 = 500ms    N+ = Number of seconds\nErrorLevel: 0 = Success. 1 = Timed out.
 WinWaitClose, [WinTitle, WinText, Wait, NotTitle, NotText]   \nUSE: Wait until the specified window does not exist.\nWAIT: BLANK = No wait    0 = 500ms    N+ = Number of seconds\nErrorLevel: 0 = Success. 1 = Timed out.
 WinWaitNotActive, [WinTitle, WinText, Wait, NotTitle, NotText]   \nUSE: Waits until the specified window is not active.\nWAIT: BLANK = No wait    0 = 500ms    N+ = Number of seconds\nErrorLevel: 0 = Success. 1 = Timed out.
-###
+
 .__Call()   \nUSE: Set a default method to run when the object is called.\nREMARK: Class meta-function. Read the docs for more info.
 .__Delete()   \nUSE: This method runs when an object is destroyed.\nREMARK: Class destructor
 .__Get()   \nUSE: Default method that runs when an undefined property is requested.\nREMARK: Class meta-function. Read the docs for more info.
@@ -543,7 +543,7 @@ WinWaitNotActive, [WinTitle, WinText, Wait, NotTitle, NotText]   \nUSE: Waits un
 .Write%NumType%()   \nUSE: Writes number to file and advances file pointer.\nNUMTYPE: Types: UInt, Int, Int64, Short, UShort, Char, UChar, Double, Float\nREMARK: Use the correct numtype in the function name.\nRETURN: Number of bytes written\nEX: file:=FileOpen(A_ScriptFullPath, "r"), file.WriteUInt(7) ;R=> 4 bytes
 .Write(String)   \nUSE: Writes string to file and advances file pointer.\nSTRING: Characters to write.\nRETURN: Number of bytes written\nEX: file:=FileOpen(A_ScriptFullPath, "rw"), file.Write(";Hello World!")\n => Writes ";Hello, World!" to script file. Overwrites first 14 chars.
 .WriteLine([String])   \nUSE: Write a string of characters followed by EOL and advance file pointer.\nREMARK: EOL (`n, `r, or `r`n) is selected when making the file object.\nRETURN: Number of bytes written to file.\nEX: file:=FileOpen(A_ScriptFullPath, "rw `n"), file.WriteLine(";Hi!")\n => Overwrites first 5 chars of the script with ";Hi!`n"
-###
+
 .__Class   \nUSE: Stores the full name of the class.\nREMARK: Class property \EX: MsgBox, % myclass.__Class
 .__Handle   \nUSE: Stores handle to system file. Intended for use with DllCall().\nREMARK: File object property.\n The docs have an example of how to use this.
 .AtEOF   \nUSE: 0 if not at end of file else gets set to a non-zero number.\nREMARK: This property should only be used with an actual files.\n Other data sources may not have an EOF marker present.\nEX: MsgBox, % "End of file: " (file.AtEOF ? "true" : "false")
@@ -562,20 +562,20 @@ WinWaitNotActive, [WinTitle, WinText, Wait, NotTitle, NotText]   \nUSE: Waits un
 .Pos   \nUSE: Retrieve or set the file pointer.\nREMARK: Synonymous with the .position property.\nEX: file.Pos := num ;=> Same as file.Seek(num)\n num := file.Pos ;=> same as num := file.Tell()
 .Position   \nUSE: Retrieve or set the file pointer.\nREMARK: Synonymous with the .pos property.\nEX: file.Position := num ;=> Same as file.Seek(num)\n num := file.Position ;=> same as num := file.Tell()
 .What   \nUSE: Name of command/function/label that failed.\nREMARK: Exception object property.\nEX: ExObj.What ;R=> Failed command/func/label
-###
+
 Class   \nUSE: Declare new class\nEX: Class myClass
 Extends   \nUSE: Inherit Base Class\nEX: Class myClass Extends anotherClass
 Global   \nUSE: Permanent public variable\nEX: Global Var := 0
 Local   \nUSE: Temporary private function variable\nEX: Local Var := 0
 Static   \nUSE: Permanent private function variable\nEX: Static Var := 0
-###
+
 ByRef   \nUSE: Access variable by address\nEX: Func(ByRef x) ; Changes to var are permanent
 New   \nUSE: New item|object\nEX: x := new Class ; Creates a new class object
 AND
 &&
 OR
 NOT
-###
+
 A_AhkPath
 A_AhkVersion
 A_AppData
@@ -736,7 +736,7 @@ ErrorLevel
 False
 ProgramFiles
 True
-###
+
 Backspace
 BS
 Enter
@@ -745,7 +745,7 @@ Escape
 Return
 Space
 Tab
-###
+
 Del
 Delete
 Down
@@ -758,7 +758,7 @@ PgDn
 PgUp
 Right
 Up
-###
+
 Numpad0
 Numpad1
 Numpad2
@@ -785,11 +785,11 @@ NumpadPgDn
 NumpadPgUp
 NumpadRight
 NumpadSub
-###
+
 CapsLock
 NumLock
 ScrollLock
-###
+
 F1
 F2
 F3
@@ -814,7 +814,7 @@ F21
 F22
 F23
 F24
-###
+
 Alt
 Control
 Ctrl
@@ -829,7 +829,7 @@ RCtrl
 RShift
 RWin
 Shift
-###
+
 Browser_Back
 Browser_Favorites
 Browser_Forward
@@ -837,11 +837,11 @@ Browser_Home
 Browser_Refresh
 Browser_Search
 Browser_Stop
-###
+
 Volume_Down
 Volume_Mute
 Volume_Up
-###
+
 AppsKey
 Break
 CtrlBreak
@@ -851,28 +851,28 @@ PrintScreen
 SC
 Sleep
 VK
-###
+
 Media_Next
 Media_Play_Pause
 Media_Prev
 Media_Stop
-###
+
 Launch_App1
 Launch_App2
 Launch_Mail
 Launch_Media
-###
+
 LButton
 MButton
 RButton
 XButton1
 XButton2
-###
+
 WheelDown
 WheelLeft
 WheelRight
 WheelUp
-###
+
 Joy1
 Joy2
 Joy3
@@ -905,7 +905,7 @@ Joy29
 Joy30
 Joy31
 Joy32
-###
+
 JoyAxes
 JoyButtons
 JoyInfo
@@ -917,7 +917,13 @@ JoyV
 JoyX
 JoyY
 JoyZ
-###
+
+AltTab
+AltTabMenu
+AltTabAndMenu
+AltTabMenuDismiss
+ShiftAltTab
+
 Abort
 AboveNormal
 ActiveX
@@ -934,9 +940,6 @@ AlNum
 Alpha
 Alt
 AltSubmit
-AltTab
-AltTabAndMenu
-AltTabMenuDismiss
 AlwaysOn
 AlwaysOnOff
 AlwaysOnTop
@@ -1268,7 +1271,6 @@ Send
 SendAndMouse
 Serial
 Set
-ShiftAltTab
 Short
 Show
 ShowDropDown
