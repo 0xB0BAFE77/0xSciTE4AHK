@@ -137,3 +137,10 @@ The file used in the picture is my SciTE syntax tester and is included with all 
   * Added in a few properties I missed.
   * There are some neat features that have been added to SciTE. I'm looking into writing an updated version that incorporates the newest version of SciTE.
   * I'll try to keep this changelog as up-to-date as possible.
+* 2022-03-25
+  * Updated TillaGoTo match patterns to fix a mismatch issue it was having with functions and classes
+  * TillaGoTo classes now also show if they are an extension of another class
+  * Style updated again (this happens regularly)
+  * Some API text updates
+  * Added value to the keywords
+    * Value is used with setters/getters in classes
