@@ -1187,9 +1187,8 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 	Loop {
 		
 		;Get the next function
-		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*?(?P<_fnd>[\w@#\$]+\([ \t]*?"
-			. "(|[\w@#\$]+[ \t]*?(|[ \t]*?,[ \t]*?[\w@#\$]+)+)\))(([ \t\r\n]+"
-			. "(" u ".*?$)?)+{|[ \t]*?{([ \t]*?$|[ \t]+" u ".*?$))", t, i)
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*?(?P<_fnd>[\w@#\$]+\(.*?\))([ \t]+"
+			. u ".*?[\n\r]+|[ \t]*?[\n\r])*[ \t]*?{", t, i)
 		
 		;Check if we found something
 		If Not i
@@ -1200,7 +1199,7 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 		{   ;Increment counter
 			sFuncs0++
 			
-			t := "Func: " t_fnd "()"
+			t := "Func: " t_fnd
 			If bExternal {
 				sFuncs%sFuncs0%_File := sPaths0
 				sFuncs%sFuncs0%_Line := LineFromPosEx(s, i)
@@ -1222,9 +1221,9 @@ GetScriptFunctions(ByRef s, bExternal = False) {
 	Loop {
 		
 		;Get the next class
-		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*class[ \t]+(?P<_fnd>[\w@#\$]+)"
-			. "([ \t]+extends[ \t]+[\w@#\$]+)?(([ \t\r\n]+(" u ".*?$)?)+{|[ \t]*?"
-			. "{([ \t]*?$|[ \t]+" u ".*?$))", t, i)
+		i := RegExMatch(s, "im)(*ANYCRLF)^[ \t]*class[ \t]+"
+			. "(?P<_fnd>[\w@#\$]+([ \t]+extends[ \t]+[\w@#\$]+)?)([ \t]+"
+			. u ";.*?[\n\r]+|[ \t]*?[\n\r])*[ \t]*?{", t, i)
 		
 		;Check if we found something
 		If Not i
