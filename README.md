@@ -144,3 +144,8 @@ The file used in the picture is my SciTE syntax tester and is included with all 
   * Some API text updates
   * Added value to the keywords
     * Value is used with setters/getters in classes
+* 2022-03-30
+  * Update to keywords file. I've reorganized a lot of the flow control commands.  
+    Before, all commands that were associated with "flow control" in the docs were put there.
+    Now, only commands that directly affect code flow are marked as flow control statements.  
+    The rest have been migrated to the appropriate command/function list.
